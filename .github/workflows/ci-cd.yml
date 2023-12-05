@@ -20,4 +20,4 @@ jobs:
       run: nuget restore ReisApplicatie.sln
 
     - name: Build the application
-      run: msbuild /p:Configuration=Release ReisApplicatie.sln
+      run: msbuild /p:Configuration=Release /p:OutputPath=bin\Release ReisApplicatie.sln
