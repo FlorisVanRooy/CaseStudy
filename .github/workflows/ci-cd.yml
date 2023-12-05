@@ -17,10 +17,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Restore NuGet packages
-      run: nuget restore YourSolution.sln
+      run: nuget restore reisApplicatie.sln
 
     - name: Build the application
-      run: msbuild /p:Configuration=Release YourSolution.sln
+      run: msbuild /p:Configuration=Release reisApplicatie.sln
 
     - name: Package artifacts
       run: |
