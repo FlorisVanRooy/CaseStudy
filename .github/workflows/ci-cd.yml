@@ -22,12 +22,6 @@ jobs:
     - name: Build the application
       run: msbuild /p:Configuration=Release reisApplicatie.sln
 
-    - name: Package artifacts
-      run: |
-        mkdir artifacts
-        cp YourProject/bin/Release/*.exe artifacts/
-        cp YourProject/bin/Release/*.dll artifacts/
-
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
