@@ -27,9 +27,8 @@ jobs:
         name: ReisApplicatie
         path: ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
 
-    - uses: montudor/action-zip@v1
-      with:
-        args: zip -qq -r ReisApplicatie.zip ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
+    - name: Zip release
+      run: powershell Compress-Archive ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/ ReisApplicatie.zip
 
     - name: Make Release
       uses: softprops/action-gh-release@v1
