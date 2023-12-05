@@ -17,20 +17,20 @@ jobs:
       run: nuget restore reisApplicatie.sln
 
     - name: Build the application
-      run: dotnet publish -r win-x64 --configuration Release
+      run: dotnet publish -r win-x64 --configuration Release -o ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
 
     - name: Upload artifact - Windows
       uses: actions/upload-artifact@v1.0.0
       with:
         name: ReisApplicatie.exe
-        path: ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/ReisApplicatie.exe
+        path: ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
 
     - name: Make Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          ReisApplicatie/bin/Release/netcoreapp3.1/linux-x64/publish/Reisapplicatie.exe
-          ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/Reisapplicatei.exe
+          ReisApplicatie/bin/Release/netcoreapp3.1/linux-x64/publish/
+          ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
