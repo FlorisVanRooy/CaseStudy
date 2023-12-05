@@ -20,4 +20,4 @@ jobs:
       run: nuget restore reisApplicatie.sln
 
     - name: Build the application
-      run: dotnet publish -r win-x64 --configuration ReleaseComplete
+      run: dotnet publish -r win-x64 --configuration ReisApplicatie.sln
