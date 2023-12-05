@@ -22,7 +22,7 @@ jobs:
     - name: Upload artifact - Windows
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ReisApplicatie.exe
+        name: ReisApplicatie
         path: ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
 
     - name: Make Release
@@ -30,7 +30,6 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          ReisApplicatie/bin/Release/netcoreapp3.1/linux-x64/publish/
           ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
