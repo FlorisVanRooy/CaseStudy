@@ -17,7 +17,19 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Restore NuGet packages
-      run: nuget restore ReisApplicatie.sln
+      run: nuget restore YourSolution.sln
 
     - name: Build the application
-      run: msbuild /p:Configuration=Release /p:OutputPath=bin\Release ReisApplicatie.sln
+      run: msbuild /p:Configuration=Release YourSolution.sln
+
+    - name: Package artifacts
+      run: |
+        mkdir artifacts
+        cp YourProject/bin/Release/*.exe artifacts/
+        cp YourProject/bin/Release/*.dll artifacts/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-artifact
+        path: artifacts/
