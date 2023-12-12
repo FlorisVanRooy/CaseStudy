@@ -1,5 +1,7 @@
+# naam van de pipeline
 name: CI/CD Pipeline
 
+# altijd als er naar de main branch wordt gepushed en accepteerd alle tags.
 on:
   push:
     branches:
@@ -7,34 +9,42 @@ on:
     tags:
       - "*"
 
+# voer dan deze taken uit
 jobs:
+  # build voor de laatste versie van windows
   build:
     runs-on: windows-latest
 
+    # doorloop deze stappen
     steps:
+
+    # checkout de repository
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # installeer alle NuGet packages en dependencies
     - name: Restore NuGet packages
       run: nuget restore reisApplicatie.sln
-
+    
+    # publish de applicatie voor een windows 64 bit systeem als Release in de map ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
     - name: Build the application
       run: dotnet publish -r win-x64 --configuration Release -o ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
 
+    # Maak van de ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/ map een artifact dat je kan dowloaden
     - name: Upload artifact - Windows
       uses: actions/upload-artifact@v1.0.0
       with:
         name: ReisApplicatie
         path: ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/
 
-    - name: Zip release
-      run: powershell Compress-Archive ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/ ReisApplicatie.zip
+    #- name: Zip release
+    #  run: powershell Compress-Archive ReisApplicatie/bin/Release/netcoreapp3.1/win-x64/publish/ ReisApplicatie.zip
 
-    - name: Make Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        files: |
-          ReisApplicatie.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #- name: Make Release
+    #  uses: softprops/action-gh-release@v1
+    #  if: startsWith(github.ref, 'refs/tags/')
+    #  with:
+      #  files: |
+      #    ReisApplicatie.zip
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

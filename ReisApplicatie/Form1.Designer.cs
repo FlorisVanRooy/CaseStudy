@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             listBoxLand = new ListBox();
             listBoxHotel = new ListBox();
             listBoxVlucht = new ListBox();
@@ -112,8 +113,9 @@
             Controls.Add(listBoxVlucht);
             Controls.Add(listBoxHotel);
             Controls.Add(listBoxLand);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
-            Text = "Form1";
+            Text = "ReisApplicatie";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
